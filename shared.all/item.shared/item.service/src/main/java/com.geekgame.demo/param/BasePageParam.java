@@ -1,7 +1,7 @@
 package com.geekgame.demo.param;
 
 
-public class BasePageParam {
+public class BasePageParam  {
 
     /**
      * 页数

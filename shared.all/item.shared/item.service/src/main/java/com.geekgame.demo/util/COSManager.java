@@ -1,5 +1,6 @@
 package com.geekgame.demo.util;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.auth.BasicCOSCredentials;
@@ -9,6 +10,7 @@ import com.qcloud.cos.http.HttpProtocol;
 import com.qcloud.cos.model.ObjectMetadata;
 import com.qcloud.cos.model.PutObjectRequest;
 import com.qcloud.cos.region.Region;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +21,8 @@ import java.util.List;
 
 @Component
 public class COSManager {
+    @Autowired
+    private ObjectMapper mapper;
     private static final String secretId = "AKIDueASVw96nERRDj3B3gV7YklbEbjdJkv8";
     private static final String secretKey = "A7pHUTDrJYYKtEKAqLceS1OZWFk01oRs";
     private static final String reg="ap-shanghai";
@@ -41,6 +45,7 @@ public class COSManager {
         PutObjectRequest putObjectRequest = null;
         String key = null;
         List<String> list = new ArrayList();
+
         for (int i=0; i < images.length; i++){
             inputStream = images[i].getInputStream();
             objectMetadata = new ObjectMetadata();
@@ -54,6 +59,6 @@ public class COSManager {
                 e.printStackTrace();
             }
         }
-        return list.toString();
+        return mapper.writeValueAsString(list);
     }
 }

@@ -9,6 +9,7 @@ import com.geekgame.demo.service.ItemService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
@@ -41,6 +42,7 @@ public class ItemServiceImpl implements ItemService {
         return delete == 1;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Item update(Item item) {
         if (item == null) {
@@ -88,7 +90,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<Item> findByUserAndValue(String userId, Double value) {
-        if (userId == null && value ==null) {
+        if (userId == null && value == null) {
             return null;
         }
         List<ItemDO> itemDOS = itemDAO.findByUserAndValue(userId, value);
