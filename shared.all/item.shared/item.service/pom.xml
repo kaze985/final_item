@@ -21,6 +21,7 @@
             <artifactId>user.service</artifactId>
             <groupId>com.geekgame.shared</groupId>
         </dependency>
+
         <dependency>
             <groupId>com.qcloud</groupId>
             <artifactId>cos_api</artifactId>
