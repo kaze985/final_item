@@ -66,16 +66,16 @@ public class ItemAPI {
         return result;
     }
 
-    @GetMapping("/show")
-    public Result<List<Item>> show(@RequestBody BasePageParam param){
-        Result<List<Item>> result = new Result<>();
+    @PostMapping("/show")
+    public Result<Paging<Item>> show(@RequestBody BasePageParam param){
+        Result<Paging<Item>> result = new Result<>();
         Paging<Item> itemPaging = itemService.pageQuery(param);
         if (itemPaging == null) {
             result.setMessage("结果为空");
             return result;
         }
         result.setSuccess(true);
-        result.setData(itemPaging.getData());
+        result.setData(itemPaging);
         return result;
     }
 
