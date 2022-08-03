@@ -9,6 +9,7 @@ import com.geekgame.demo.param.ItemReceiveParam;
 import com.geekgame.demo.service.ItemService;
 import com.geekgame.demo.util.COSManager;
 import com.geekgame.demo.util.SnowflakeIdGenerator;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -104,6 +105,46 @@ public class ItemAPI {
         }
         result.setSuccess(true);
         result.setData(itemList);
+        return result;
+    }
+
+    @GetMapping("/delete")
+    public Result delete(@RequestParam String itemId){
+        Result result = new Result<>();
+        boolean delete = itemService.delete(itemId);
+        if (delete) {
+            result.setSuccess(true);
+        }
+        return result;
+    }
+
+    @PostMapping("/update")
+    public Result<Item> update(ItemReceiveParam param) throws IOException {
+        Result<Item> result = new Result<>();
+        Item item = new Item();
+        item.setId(param.getId());
+        if (!StringUtils.isEmpty(param.getName())) {
+            item.setName(param.getName());
+        }
+        if (param.getValue() != null) {
+            item.setValue(param.getValue());
+        }
+        if (!StringUtils.isEmpty(param.getIntro())) {
+            item.setIntro(param.getIntro());
+        }
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        String now = LocalDateTime.now().format(dateTimeFormatter);
+        if (param.getImgs() != null && param.getImgs().length > 0) {
+            String imgs = cosManager.upload(param.getImgs(), "image-"+now);
+            item.setImgs(imgs);
+        }
+
+        Item update = itemService.update(item);
+        if (update != null) {
+            result.setSuccess(true);
+            result.setData(update);
+        }
         return result;
     }
 }

@@ -21,28 +21,28 @@
     <update id="update" parameterType="com.geekgame.demo.dataobject.ItemDO">
         update `item`
         <set>
-            <if test="name!=null">
+            <if test="name != null">
                 name = #{name},
             </if>
-            <if test="value!=null">
+            <if test="value != null">
                 value = #{value},
             </if>
-            <if test="ownerId!=null">
+            <if test="ownerId != null">
                 owner_id = #{ownerId},
             </if>
-            <if test="ownerName!=null">
+            <if test="ownerName != null">
                 owner_name = #{ownerName},
             </if>
-            <if test="intro!=null">
+            <if test="intro != null">
                 intro = #{intro},
             </if>
-            <if test="imgs!=null">
+            <if test="imgs != null">
                 imgs = #{imgs},
             </if>
             gmt_modified = now()
         </set>
         <where>
-            <if test="id !='' and id!=null">
+            <if test="id != '' and id != null">
                 id = #{id}
             </if>
         </where>
