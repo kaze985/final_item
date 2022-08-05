@@ -12,6 +12,9 @@ import org.springframework.core.env.Environment;
 
 import javax.sql.DataSource;
 
+/**
+ * 数据源配置类
+ */
 @Configuration
 public class DataSourceConfig {
 
@@ -25,7 +28,7 @@ public class DataSourceConfig {
         dataSource.setUsername(env.getProperty("spring.datasource.username"));
         dataSource.setPassword(env.getProperty("spring.datasource.password"));
         dataSource.setDriverClassName(env.getProperty("spring.datasource.driver-class-name"));
-        //这上面是获取配置文件中的信息，url,username,password,driverclassname等
+
         return dataSource;
     }
 

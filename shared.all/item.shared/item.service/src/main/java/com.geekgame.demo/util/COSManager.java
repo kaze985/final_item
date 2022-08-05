@@ -19,6 +19,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 图片上传工具类
+ */
 @Component
 public class COSManager {
     @Autowired
@@ -30,6 +33,9 @@ public class COSManager {
     private static COSClient cosClient;
 
 
+    /**
+     * 初始化COS客户端
+     */
     public COSManager(){
         COSCredentials cred = new BasicCOSCredentials(secretId, secretKey);
         Region region = new Region(reg);
@@ -38,6 +44,13 @@ public class COSManager {
         cosClient = new COSClient(cred, clientConfig);
     }
 
+    /**
+     * 上传对象
+     * @param images
+     * @param name
+     * @return
+     * @throws IOException
+     */
     public String upload(MultipartFile[] images, String name) throws IOException {
 
         InputStream inputStream = null;

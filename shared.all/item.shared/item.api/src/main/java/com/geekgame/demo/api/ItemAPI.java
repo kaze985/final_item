@@ -29,10 +29,18 @@ public class ItemAPI {
     @Autowired
     private COSManager cosManager;
 
+    /**
+     * 上传物品
+     * @param param
+     * @param request
+     * @return
+     * @throws IOException
+     */
     @PostMapping("/upload")
     public Result<Item> upload(ItemReceiveParam param, HttpServletRequest request) throws IOException {
         Result<Item> result = new Result<>();
 
+        //根据前端传来的参数装配物品模型
         Item item = new Item();
         item.setId(String.valueOf(generator.nextId()));
         item.setName(param.getName());
@@ -49,6 +57,7 @@ public class ItemAPI {
         item.setOwnerId(loginInfo.getId());
         item.setOwnerName(loginInfo.getUserName());
 
+        //上传图片到腾讯云COS并返回图片url
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
         String now = LocalDateTime.now().format(dateTimeFormatter);
         if (param.getImgs() != null && param.getImgs().length > 0) {
@@ -56,6 +65,7 @@ public class ItemAPI {
             item.setImgs(imgs);
         }
 
+        //调用上传服务
         Item add = itemService.add(item);
         if (add == null) {
             result.setMessage("上传失败");
@@ -67,9 +77,15 @@ public class ItemAPI {
         return result;
     }
 
+    /**
+     * 生成物品展示面板
+     * @param param
+     * @return
+     */
     @PostMapping("/show")
     public Result<Paging<Item>> show(@RequestBody BasePageParam param){
         Result<Paging<Item>> result = new Result<>();
+        //调用分页查询服务
         Paging<Item> itemPaging = itemService.pageQuery(param);
         if (itemPaging == null) {
             result.setMessage("结果为空");
@@ -80,10 +96,18 @@ public class ItemAPI {
         return result;
     }
 
+    /**
+     *
+     * 生成可交换物品列表
+     * @param value
+     * @param request
+     * @return
+     */
     @GetMapping("/generate")
     public Result<List<Item>> generate(@RequestParam Double value, HttpServletRequest request){
         Result<List<Item>> result = new Result<>();
         UserLoginInfo loginInfo = (UserLoginInfo) request.getSession().getAttribute("loginInfo");
+        //调用查询服务
         List<Item> itemList = itemService.findByUserAndValue(loginInfo.getId(), value);
         if (itemList == null) {
             result.setMessage("结果为空");
@@ -94,10 +118,16 @@ public class ItemAPI {
         return result;
     }
 
+    /**
+     * 我的物品
+     * @param request
+     * @return
+     */
     @GetMapping("/myitems")
     public Result<List<Item>> myItems(HttpServletRequest request){
         Result<List<Item>> result = new Result<>();
         UserLoginInfo loginInfo = (UserLoginInfo) request.getSession().getAttribute("loginInfo");
+        //调用查询服务
         List<Item> itemList = itemService.findByUserAndValue(loginInfo.getId(), null);
         if (itemList == null) {
             result.setMessage("结果为空");
@@ -108,6 +138,11 @@ public class ItemAPI {
         return result;
     }
 
+    /**
+     * 删除物品
+     * @param itemId
+     * @return
+     */
     @GetMapping("/delete")
     public Result delete(@RequestParam String itemId){
         Result result = new Result<>();
@@ -118,6 +153,12 @@ public class ItemAPI {
         return result;
     }
 
+    /**
+     * 更新物品信息
+     * @param param
+     * @return
+     * @throws IOException
+     */
     @PostMapping("/update")
     public Result<Item> update(ItemReceiveParam param) throws IOException {
         Result<Item> result = new Result<>();

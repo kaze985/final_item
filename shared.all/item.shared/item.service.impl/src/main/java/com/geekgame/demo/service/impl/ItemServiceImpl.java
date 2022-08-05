@@ -16,6 +16,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 服务实现类
+ */
 @Service
 @DubboService
 public class ItemServiceImpl implements ItemService {

@@ -1,6 +1,8 @@
 package com.geekgame.demo.param;
 
-
+/**
+ * 分页参数类
+ */
 public class BasePageParam  {
 
     /**

@@ -6,6 +6,9 @@ import com.geekgame.demo.param.BasePageParam;
 
 import java.util.List;
 
+/**
+ * 服务接口
+ */
 public interface ItemService {
     Item add(Item item);
 
