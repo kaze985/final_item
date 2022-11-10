@@ -17,8 +17,8 @@ import java.util.List;
 
 public class OSSManager {
     private static final String endpoint = "https://oss-cn-hangzhou.aliyuncs.com";
-    private static final String accessKeyId = "";
-    private static final String accessKeySecret = "";
+    private static final String accessKeyId = "LTAI5tKyQtHzdsqdK6rooVud";
+    private static final String accessKeySecret = "P07oagsbHdxwjsx0FoTOsSV5U5m5GT";
     private static final String bucketName = "lppnb-item-images";
     private static final String prefix = "https://lppnb-item-images.oss-cn-hangzhou.aliyuncs.com/";
 

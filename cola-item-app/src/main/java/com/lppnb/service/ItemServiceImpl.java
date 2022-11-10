@@ -14,6 +14,7 @@ import com.lppnb.executor.ItemUpdateCmdExe;
 import com.lppnb.executor.query.ItemGetQryExe;
 import com.lppnb.executor.query.ItemListByPageQryExe;
 import com.lppnb.executor.query.ItemListQryExe;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 服务实现类
  */
 @Service
-//@DubboService
+@DubboService
 @CatchAndLog
 public class ItemServiceImpl implements ItemService {
 

@@ -26,21 +26,24 @@ spring:
   application:
     name: lppnb-item-app
 
+  main:
+    allow-circular-references: true
+
   cloud:
     nacos:
       discovery:
         server-addr: 182.92.185.137:8848
 
-#dubbo:
-#  cloud:
-#    subscribed-services:
-#  protocol:
-#    name: dubbo
-#    port: -1
-#  registry:
-#    address: spring-cloud://localhost
-#  scan:
-#    base-packages: com.lppnb.service
+dubbo:
+  cloud:
+    subscribed-services:
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: spring-cloud://localhost
+  scan:
+    base-packages: com.lppnb.service
 
 seata:
   enabled: true
