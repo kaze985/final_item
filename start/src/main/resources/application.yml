@@ -27,7 +27,7 @@ spring:
     name: lppnb-item-app
 
   main:
-    allow-circular-references: true
+    allow-circular-references: true #允许循环依赖
 
   cloud:
     nacos:

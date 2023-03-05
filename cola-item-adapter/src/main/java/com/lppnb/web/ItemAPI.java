@@ -78,6 +78,11 @@ public class ItemAPI {
      */
     @GetMapping("/delete")
     public Response delete(@RequestParam String itemId){
+        SingleResponse<ItemDTO> item = itemService.getItem(new ItemGetQry(itemId));
+        List<String> list = JSON.parseObject(item.getData().getImgs(), List.class);
+        for (String s : list) {
+            OSSManager.delete(s);
+        }
         return itemService.deleteItem(new ItemDeleteCmd(itemId));
     }
 

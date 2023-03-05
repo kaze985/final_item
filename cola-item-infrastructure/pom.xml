@@ -17,6 +17,10 @@
             <groupId>com.lppnb</groupId>
             <artifactId>cola-item-domain</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.lppnb</groupId>
+            <artifactId>cola-item-client</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
